@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Simon Game</title>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <div id="outer-circle">
+            <div class="simon-button" id="topleft"></div>
+            <div class="simon-button" id="topright"></div>
+            <div class="simon-button" id="bottomleft"></div>
+            <div class="simon-button" id="bottomright"></div>
+            <div class="simon-button" id="inner-circle">
+                <div id="title" class="font-effect-emboss">SIMON!</div>
+                <div id="switches">
+                    <input type="checkbox" class="toggle" id="on" />
+                    <button class="button" id="start">Start</button>
+                    <input type="checkbox" class="toggle" id="strict" />
+                </div>
+                <div class="text1"><span>POWER</span><span>STRICT</span></div>
+                <div id="turn"></div>
+                <div class="text2">COUNT</div>
+            </div>
+        </div>
+        <script src="js/index.js"></script>
+    </body>
+</html>
