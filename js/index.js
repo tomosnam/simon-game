@@ -10,229 +10,229 @@ let strict = false; // Jugar en modo estricto, si el jugador se equivoca se empi
 let on = false; // Si el jugador puede jugar.
 let win; // Si el jugador ganó.
 
-const turnCounter = document.querySelector('#turn');
-const topLeft = document.querySelector('#topleft');
-const topRight = document.querySelector('#topright');
-const bottomLeft = document.querySelector('#bottomleft');
-const bottomRight = document.querySelector('#bottomright');
-const strictButton = document.querySelector('#strict');
-const onButton = document.querySelector('#on');
-const startButton = document.querySelector('#start');
+const turnCounter = document.querySelector("#turn");
+const topLeft = document.querySelector("#topleft");
+const topRight = document.querySelector("#topright");
+const bottomLeft = document.querySelector("#bottomleft");
+const bottomRight = document.querySelector("#bottomright");
+const strictButton = document.querySelector("#strict");
+const onButton = document.querySelector("#on");
+const startButton = document.querySelector("#start");
 
-onButton.addEventListener('click', turnOn);
-startButton.addEventListener('click', startGame);
-topLeft.addEventListener('click', handleTopLeft);
-topRight.addEventListener('click', handleTopRight);
-bottomLeft.addEventListener('click', handleBottomLeft);
-bottomRight.addEventListener('click', handleBottomRight);
+onButton.addEventListener("click", turnOn);
+startButton.addEventListener("click", startGame);
+topLeft.addEventListener("click", handleTopLeft);
+topRight.addEventListener("click", handleTopRight);
+bottomLeft.addEventListener("click", handleBottomLeft);
+bottomRight.addEventListener("click", handleBottomRight);
 
 // Juggar en modo stricto o no.
-strictButton.addEventListener('click', event => {
-    if (strictButton.checked == true) strict = true;
-    else strict = false;
+strictButton.addEventListener("click", event => {
+  if (strictButton.checked == true) strict = true;
+  else strict = false;
 });
 
 // Encender el juego.
 function turnOn(event) {
-    if (onButton.checked == true) {
-        on = true;
-        turnCounter.innerHTML = '-';
-    } else {
-        on = false;
-        turnCounter.innerHTML = '';
-        clearColor();
-        clearInterval(intervalId);
-    }
+  if (onButton.checked == true) {
+    on = true;
+    turnCounter.innerHTML = "-";
+  } else {
+    on = false;
+    turnCounter.innerHTML = "";
+    clearColor();
+    clearInterval(intervalId);
+  }
 }
 
 function startGame(event) {
-    if (on || win) {
-        play();
-    }
+  if (on || win) {
+    play();
+  }
 }
 
 function play() {
-    win = false;
-    order = [];
-    playerOrder = [];
-    flash = 0;
-    intervalId = 0;
-    turn = 1;
-    turnCounter.innerHTML = 1;
-    good = true;
+  win = false;
+  order = [];
+  playerOrder = [];
+  flash = 0;
+  intervalId = 0;
+  turn = 1;
+  turnCounter.innerHTML = 1;
+  good = true;
 
-    for (let i = 0; i < 20; i++) {
-        order.push(Math.floor(Math.random() * 4) + 1);
-    }
+  for (let i = 0; i < 20; i++) {
+    order.push(Math.floor(Math.random() * 4) + 1);
+  }
 
-    compTurn = true;
+  compTurn = true;
 
-    intervalId = setInterval(gameTurn, 800);
+  intervalId = setInterval(gameTurn, 800);
 }
 
 function gameTurn() {
-    on = false; // El jugador no puede jugar mientras la computadora juega.
+  on = false; // El jugador no puede jugar mientras la computadora juega.
 
-    // Si turno de la computadora terminó?
-    if (flash == turn) {
-        clearInterval(intervalId);
-        compTurn = false;
-        clearColor();
-        on = true; //El jugador puede jugar.
-    }
+  // Si turno de la computadora terminó?
+  if (flash == turn) {
+    clearInterval(intervalId);
+    compTurn = false;
+    clearColor();
+    on = true; //El jugador puede jugar.
+  }
 
-    if (compTurn) {
-        clearColor();
-        setTimeout(() => {
-            if (order[flash] == 1) one();
-            if (order[flash] == 2) two();
-            if (order[flash] == 3) three();
-            if (order[flash] == 4) four();
-            flash++;
-        }, 200);
-    }
+  if (compTurn) {
+    clearColor();
+    setTimeout(() => {
+      if (order[flash] == 1) one();
+      if (order[flash] == 2) two();
+      if (order[flash] == 3) three();
+      if (order[flash] == 4) four();
+      flash++;
+    }, 200);
+  }
 }
 
 function handleTopLeft(event) {
-    if (on) {
-        playerOrder.push(1);
-        check();
-        one();
-        if (!win) {
-            setTimeout(() => {
-                clearColor();
-            }, 300);
-        }
+  if (on) {
+    playerOrder.push(1);
+    check();
+    one();
+    if (!win) {
+      setTimeout(() => {
+        clearColor();
+      }, 300);
     }
+  }
 }
 
 function handleTopRight(event) {
-    if (on) {
-        playerOrder.push(2);
-        check();
-        two();
-        if (!win) {
-            setTimeout(() => {
-                clearColor();
-            }, 300);
-        }
+  if (on) {
+    playerOrder.push(2);
+    check();
+    two();
+    if (!win) {
+      setTimeout(() => {
+        clearColor();
+      }, 300);
     }
+  }
 }
 
 function handleBottomLeft(event) {
-    if (on) {
-        playerOrder.push(3);
-        check();
-        three();
-        if (!win) {
-            setTimeout(() => {
-                clearColor();
-            }, 300);
-        }
+  if (on) {
+    playerOrder.push(3);
+    check();
+    three();
+    if (!win) {
+      setTimeout(() => {
+        clearColor();
+      }, 300);
     }
+  }
 }
 
 function handleBottomRight(event) {
-    if (on) {
-        playerOrder.push(4);
-        check();
-        four();
-        if (!win) {
-            setTimeout(() => {
-                clearColor();
-            }, 300);
-        }
+  if (on) {
+    playerOrder.push(4);
+    check();
+    four();
+    if (!win) {
+      setTimeout(() => {
+        clearColor();
+      }, 300);
     }
+  }
 }
 
 function check() {
-    if (playerOrder[playerOrder.length - 1] !== order[playerOrder.length - 1])
-        good = false;
-    if (playerOrder.length == 20 && good) {
-        winGame();
-    }
+  if (playerOrder[playerOrder.length - 1] !== order[playerOrder.length - 1])
+    good = false;
+  if (playerOrder.length == 3 && good) {
+    winGame();
+  }
 
-    if (good == false) {
-        flashColor();
-        turnCounter.innerHTML = 'NO!';
-        setTimeout(() => {
-            turnCounter.innerHTML = turn;
-            clearColor();
+  if (good == false) {
+    flashColor();
+    turnCounter.innerHTML = "NO!";
+    setTimeout(() => {
+      turnCounter.innerHTML = turn;
+      clearColor();
 
-            if (strict) play();
-            else goCumputer();
-        }, 800);
+      if (strict) play();
+      else goCumputer();
+    }, 800);
 
-        //noise = false;
-    }
+    //noise = false;
+  }
 
-    if (turn == playerOrder.length && good && !win) {
-        turn++;
-        turnCounter.innerHTML = turn;
-        goCumputer();
-    }
+  if (turn == playerOrder.length && good && !win) {
+    turn++;
+    turnCounter.innerHTML = turn;
+    goCumputer();
+  }
 }
 
 function winGame() {
-    flashColor();
-    turnCounter.innerHTML = 'WIN!';
-    on = false;
-    win = true;
+  flashColor();
+  turnCounter.innerHTML = "WIN!";
+  on = false;
+  win = true;
 }
 
 function goCumputer() {
-    compTurn = true;
-    flash = 0;
-    playerOrder = [];
-    good = true;
-    intervalId = setInterval(gameTurn, 800);
+  compTurn = true;
+  flash = 0;
+  playerOrder = [];
+  good = true;
+  intervalId = setInterval(gameTurn, 800);
 }
 
 function one() {
-    /*if (noise)
+  /*if (noise)
         let audio = document.getElementById('clip1');
         audio.play();
     }*/
-    noise = true;
-    topLeft.style.backgroundColor = 'lightgreen';
+  noise = true;
+  topLeft.style.backgroundColor = "##795548";
 }
 
 function two() {
-    /*if (noise) {
+  /*if (noise) {
         let audio = document.getElementById('clip2');
         audio.play();
     }*/
-    noise = true;
-    topRight.style.backgroundColor = 'tomato';
+  noise = true;
+  topRight.style.backgroundColor = "#795548";
 }
 function three() {
-    /*if (noise) {
+  /*if (noise) {
         let audio = document.getElementById('clip3');
         audio.play();
     }*/
-    noise = true;
-    bottomLeft.style.backgroundColor = 'yellow';
+  noise = true;
+  bottomLeft.style.backgroundColor = "#795548";
 }
 
 function four() {
-    /*if (noise) {
+  /*if (noise) {
         let audio = document.getElementById('clip4');
         audio.play();
     }*/
-    noise = true;
-    bottomRight.style.backgroundColor = 'lightskyblue';
+  noise = true;
+  bottomRight.style.backgroundColor = "#3e2723";
 }
 
 function clearColor() {
-    topLeft.style.backgroundColor = 'darkgreen';
-    topRight.style.backgroundColor = 'darkred';
-    bottomLeft.style.backgroundColor = 'goldenrod';
-    bottomRight.style.backgroundColor = 'darkblue';
+  topLeft.style.backgroundColor = "#388e3c";
+  topRight.style.backgroundColor = "#d32f2f";
+  bottomLeft.style.backgroundColor = "#ffeb3b";
+  bottomRight.style.backgroundColor = "#448aff";
 }
 
 function flashColor() {
-    topLeft.style.backgroundColor = 'lightgreen';
-    topRight.style.backgroundColor = 'tomato';
-    bottomLeft.style.backgroundColor = 'yellow';
-    bottomRight.style.backgroundColor = 'lightskyblue';
+  topLeft.style.backgroundColor = "#795548";
+  topRight.style.backgroundColor = "#795548";
+  bottomLeft.style.backgroundColor = "#795548";
+  bottomRight.style.backgroundColor = "#795548";
 }
