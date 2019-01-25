@@ -148,7 +148,7 @@ function handleBottomRight(event) {
 function check() {
   if (playerOrder[playerOrder.length - 1] !== order[playerOrder.length - 1])
     good = false;
-  if (playerOrder.length == 3 && good) {
+  if (playerOrder.length == 20 && good) {
     winGame();
   }
 
@@ -194,7 +194,7 @@ function one() {
         audio.play();
     }*/
   noise = true;
-  topLeft.style.backgroundColor = "##795548";
+  topLeft.style.backgroundColor = "#795548";
 }
 
 function two() {
@@ -220,14 +220,14 @@ function four() {
         audio.play();
     }*/
   noise = true;
-  bottomRight.style.backgroundColor = "#3e2723";
+  bottomRight.style.backgroundColor = "#795548";
 }
 
 function clearColor() {
-  topLeft.style.backgroundColor = "#388e3c";
-  topRight.style.backgroundColor = "#d32f2f";
-  bottomLeft.style.backgroundColor = "#ffeb3b";
-  bottomRight.style.backgroundColor = "#448aff";
+  topLeft.style.backgroundColor = "#00897b";
+  topRight.style.backgroundColor = "#ff5252";
+  bottomLeft.style.backgroundColor = "#fdd835";
+  bottomRight.style.backgroundColor = "#1976d2";
 }
 
 function flashColor() {
