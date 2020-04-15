@@ -1,2 +1,2 @@
 # simon-game
-Projecto de freecodecamp.
+Proyecto de freecodecamp.
